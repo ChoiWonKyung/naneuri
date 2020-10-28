@@ -1,11 +1,11 @@
 export default {
   common: {
-    add: 'Add',
-    cancel: 'Cancel',
+    add: '추가',
+    cancel: '취소',
     description: 'Description',
-    delete: 'Delete',
-    title: 'Title',
-    save: 'Save',
+    delete: '삭제',
+    title: '제목',
+    save: '저장',
     faq: 'FAQ',
     contact: 'Contact Us',
     tos: 'Terms of Service',
@@ -62,7 +62,7 @@ export default {
     viewReport: 'View Report'
   },
   usermenu: {
-    profile: 'Profile',
+    profile: '프로필',
     signin: 'Sign In',
     dashboard: 'Dashboard',
     signout: 'Sign Out'
@@ -90,8 +90,8 @@ export default {
   },
   login: {
     title: 'Sign In',
-    email: 'Email',
-    password: 'Password',
+    email: '이메일',
+    password: '비밀번호',
     button: 'Sign In',
     orsign: 'Or sign in with',
     forgot: 'Forgot password?',

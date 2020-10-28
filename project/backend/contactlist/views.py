@@ -11,7 +11,7 @@ def address_list(request):
     if request.method == 'GET':
         query_set = Addresses.objects.all()
         serializer = AddressesSerializer(query_set, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(data=serializer.data, safe=False)
         
     elif request.method == 'POST':
         data = JSONParser().parse(request)

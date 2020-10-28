@@ -85,43 +85,15 @@
             </div>
           </div>
         </template>
-
-        <template v-slot:item.verified="{ item }">
-          <v-icon v-if="item.verified" small color="success">
-            mdi-check-circle
-          </v-icon>
-          <v-icon v-else small>
-            mdi-circle-outline
-          </v-icon>
+        <template v-slot:item.name="{ item }">
+          <div>{{ item.name.toString() | capitalize }}</div>
+        </template>
+        <template v-slot:item.phone_number="{ item }">
+          <div>{{ item.phone_number.toString() | capitalize }}</div>
         </template>
 
-        <template v-slot:item.disabled="{ item }">
-          <div>{{ item.disabled.toString() | capitalize }}</div>
-        </template>
-
-        <template v-slot:item.role="{ item }">
-          <v-chip
-            label
-            small
-            class="font-weight-bold"
-            :color="item.role === 'ADMIN' ? 'primary' : undefined"
-          >{{ item.role | capitalize }}</v-chip>
-        </template>
-
-        <template v-slot:item.created="{ item }">
-          <div>{{ item.created | formatDate('ll') }}</div>
-        </template>
-
-        <template v-slot:item.lastSignIn="{ item }">
-          <div>{{ item.lastSignIn | formatDate('lll') }}</div>
-        </template>
-
-        <template v-slot:item.action="{ }">
-          <div class="actions">
-            <v-btn icon to="/users/edit">
-              <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
-          </div>
+        <template v-slot:item.address="{ item }">
+          <div>{{ item.address.toString() | capitalize }}</div>
         </template>
       </v-data-table>
     </v-card>
@@ -129,7 +101,8 @@
 </template>
 
 <script>
-import users from './content/users'
+
+// import users from './content/users'
 import CopyLabel from '../../components/common/CopyLabel'
 
 export default {
@@ -138,6 +111,7 @@ export default {
   },
   data() {
     return {
+      users: [],
       isLoading: false,
       breadcrumbs: [{
         text: 'Users',
@@ -152,16 +126,11 @@ export default {
       headers: [
         { text: 'Id', align: 'left', value: 'id' },
         { text: 'Email', value: 'email' },
-        { text: 'Verified', value: 'verified' },
         { text: 'Name', align: 'left', value: 'name' },
-        { text: 'Role', value: 'role' },
-        { text: 'Created', value: 'created' },
-        { text: 'Last SignIn', value: 'lastSignIn' },
-        { text: 'Disabled', value: 'disabled' },
+        { text: 'phonenumber', value: 'phone_number' },
+        { text: 'address', value: 'address' },
         { text: '', sortable: false, align: 'right', value: 'action' }
-      ],
-
-      users
+      ]
     }
   },
   watch: {
@@ -169,9 +138,22 @@ export default {
 
     }
   },
+  created: function () {
+    this.fetch_all_users()
+  },
   methods: {
     searchUser() {},
-    open() {}
+    open() {},
+    async fetch_all_users() {
+      try {
+        const res = await axios.get('http://127.0.0.1:8000/addresses')
+
+        this.user = res.data
+      }
+      catch (err) {
+        console.log('GET ERRRR', err)
+      }
+    }
   }
 }
 </script>

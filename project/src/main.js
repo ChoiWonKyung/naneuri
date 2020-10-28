@@ -19,6 +19,7 @@ import './plugins/echarts'
 import './plugins/animate'
 import './plugins/clipboard'
 import './plugins/moment'
+import './plugins/axios'
 
 // FILTERS
 import './filters/capitalize'
@@ -36,7 +37,6 @@ import 'animate.css/animate.min.css'
 
 // Set this to false to prevent the production tip on Vue startup.
 Vue.config.productionTip = false
-
 /*
 |---------------------------------------------------------------------
 | Main Vue Instance
@@ -47,10 +47,17 @@ Vue.config.productionTip = false
 | https://vuejs.org/v2/guide/instance.html
 |
 */
+window.axios = require('axios')
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+window.axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, POST, DELETE, OPTIONS'
+window.axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+
 export default new Vue({
   i18n,
   vuetify,
   router,
   store,
+  axios,
   render: (h) => h(App)
 }).$mount('#app')
